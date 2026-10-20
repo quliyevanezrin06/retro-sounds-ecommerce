@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- OWASP Content Security Policy: Bütün xarici şəkil keçidlərinə icazə verir -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src * data: blob: http: https:; connect-src * 'self' http: https: ws: wss:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval';">
+    <title>Retro Vinyl & Qramafon</title>
+
+    <!-- ========================================================================================== -->
+    <!--  ŞƏKİL LİNKİ YERLƏRİ: İSTƏDİYİN BÜTÜN LİNKƏRİ AŞAĞIDAKI DIRNAQLARIN ( "" ) İÇİNƏ YAPIŞDIR  -->
+    <!-- ========================================================================================== -->
+    <script>
+        window.MEHSUL_SEKILLERI = {
+            1: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEL_GLVR1d3pmWIcW-bJ2fTKn2_-p2glgd0WrAoPJAox_MjPdQ_dZnID6z&s=10", // 1-ci Məhsul (Pink Floyd)
+            2: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd-5C7jFisWtUjQnCUWY5pWdrLYod2zXGmSdw2KurNhw&s=10", // 2-ci Məhsul (Sony PS)
+            3: "https://media.pitchfork.com/photos/63f641d801dbe796fab80055/master/w_1280%2Cc_limit/Daft-Punk-Random-Access-Memories.jpg", // 3-cü Məhsul (Daft Punk)
+            4: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmLyKV9iDBZBL7imgVV-asqWzt8qTrZ3m3OlypX9oLxi-ZcuXPAF8pkT7h&s=10", // 4-cü Məhsul (Pro-Ject)
+            5: "https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", // 5-ci Məhsul (Michael Jackson)
+            6: "https://i.scdn.co/image/ab67616d0000b273c4ba12e550c71777898c94ee", // 6-cı Məhsul (Vaqif Mustafazadə)
+            7: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeWei9ATLNYB3-vSozZovAJ_g7qNrhgBiAdwb7Ed3w6g&s=10", // 7-ci Məhsul (Victrola Nostalgic)
+            8: "https://smarthomesounds.sirv.com/live-magento/sozo_imagify/ccfae63fba270003e3a1dcf8a66450ea/var/www_m2/smarthomesounds.co.uk/htdocs/wp/wp-content/uploads/2020/03/7-reasons-to-buy-the-audio-technica-at-lp120xusb-blog-header.jpg", // 8-ci Məhsul (Audio-Technica)
+            9: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ7OwGHPX2kxhixecCKdrG6M-0BcOlHBuqa7TAnm5cbA&s=10", // 9-cu Məhsul (The Beatles - Abbey Road)
+            10: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzjPr5hhv2W23ZW29nYOn_J926sCHF9sBX3PjcxECDBg&s=10" // 10-cu Məhsul (Crosley Cruiser)
+        };
+
+        // Yuxarıda qoyduğun linkləri avtomatik kartlara tətbiq edən sinxronizasiya skripti
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('products-container');
+            if (container) {
+                const observer = new MutationObserver(() => {
+                    const cards = container.querySelectorAll('.product-card');
+                    cards.forEach((card, index) => {
+                        const img = card.querySelector('img');
+                        // Əgər 11-ci məhsul əlavə etsən, avtomatik bu ehtiyat şəkil qoyulacaq
+                        const customLink = window.MEHSUL_SEKILLERI[index + 1] || "https://images.unsplash.com/photo-1539185441755-769473a23570?w=600&q=80";
+                        if (img && img.src !== customLink) {
+                            img.src = customLink;
+                            img.onerror = () => { img.src = "https://images.unsplash.com/photo-1539185441755-769473a23570?w=600&q=80"; };
+                        }
+                    });
+                });
+                observer.observe(container, { childList: true, subtree: true });
+            }
+        });
+    </script>
+
+    <style>
+        :root { --primary: #d4af37; --bg: #121212; --card-bg: #1e1e1e; --text: #f4f4f4; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; }
+        
+        #auth-page { display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column; }
+        .auth-title { color: var(--primary); font-size: 32px; letter-spacing: 2px; margin-bottom: 30px; text-align: center;}
+        .auth-container { max-width: 400px; width: 100%; padding: 0 20px;}
+        .auth-box { padding: 40px; background-color: #0a0a0a; border-radius: 10px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .auth-box h2 { color: var(--primary); margin-top: 0; text-align: center; }
+        .auth-box input { width: 100%; padding: 15px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; font-size: 16px;}
+        .auth-box button { background: var(--primary); color: #000; padding: 15px; border: none; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 16px; transition: 0.3s;}
+        .auth-box button:hover { background: #fff; }
+        .toggle-text { text-align: center; margin-top: 20px; font-size: 14px; color: #888; }
+        .toggle-text span { color: var(--primary); cursor: pointer; text-decoration: underline; }
+        .msg { margin-top: 15px; font-weight: bold; min-height: 20px; text-align: center;}
+        
+        #store-page { display: none; }
+        header { background-color: #0a0a0a; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100;}
+        header h1 { margin: 0; color: var(--primary); font-size: 24px; cursor: pointer;}
+        .cart-btn { background: var(--primary); color: #000; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s;}
+        .cart-btn:hover { background: #fff; }
+        .logout-btn { background: #ff4444; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-right: 15px; }
+        
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
+        .product-card { background-color: var(--card-bg); border-radius: 10px; overflow: hidden; transition: transform 0.3s; border: 1px solid #333; }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .product-image { width: 100%; height: 220px; object-fit: cover; }
+        .product-info { padding: 15px; }
+        .product-title { margin: 0 0 10px 0; font-size: 16px; color: var(--primary); height: 40px; }
+        .product-price { font-size: 20px; font-weight: bold; margin: 5px 0; }
+        .product-stock { font-size: 13px; color: #888; margin-bottom: 15px; }
+        .add-to-cart { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--primary); color: var(--primary); border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .add-to-cart:hover { background: var(--primary); color: #000; }
+        .add-to-cart:disabled { border-color: #555; color: #555; cursor: not-allowed; background: transparent; }
+
+        .modal { display: none; position: fixed; z-index: 200; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); }
+        .modal-content { background-color: var(--card-bg); margin: 5% auto; padding: 25px; border: 1px solid var(--primary); width: 90%; max-width: 600px; border-radius: 10px; position: relative; max-height: 80vh; overflow-y: auto;}
+        .close-modal { color: #aaa; position: absolute; right: 20px; top: 15px; font-size: 32px; font-weight: bold; cursor: pointer; transition: 0.2s;}
+        .close-modal:hover { color: var(--primary); }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #333; }
+        .cart-item-name { flex-grow: 1; padding-right: 15px;}
+        .cart-item button { background: #ff4444; color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; margin-left: 15px;}
+        .cart-total { font-size: 24px; font-weight: bold; color: var(--primary); text-align: right; margin-top: 25px; }
+        .checkout-btn { width: 100%; background: #00C851; color: #000; padding: 15px; border: none; border-radius: 5px; font-size: 18px; font-weight: bold; margin-top: 25px; cursor: pointer; transition: 0.3s;}
+        .checkout-btn:hover { background: #007E33; color: white;}
+    </style>
+</head>
+<body>
+
+    <!-- SƏHİFƏ 1: GİRİŞ/QEYDİYYAT -->
+    <div id="auth-page">
+        <h1 class="auth-title">RETRO SOUNDS</h1>
+        <div class="auth-container">
+            <div class="auth-box" id="login-box">
+                <h2>Sistemə Giriş</h2>
+                <form id="login-form">
+                    <input type="text" id="login-username" placeholder="İstifadəçi adı" required>
+                    <input type="password" id="login-password" placeholder="Şifrə" required>
+                    <button type="submit">Daxil Ol</button>
+                </form>
+                <p id="login-msg" class="msg"></p>
+                <p class="toggle-text">Hesabınız yoxdur? <span onclick="switchAuth('register')">Qeydiyyatdan keçin</span></p>
+            </div>
+            <div class="auth-box" id="register-box" style="display: none;">
+                <h2>Yeni Hesab Yarat</h2>
+                <form id="register-form">
+                    <input type="text" id="reg-username" placeholder="İstifadəçi adı" required minlength="3">
+                    <input type="password" id="reg-password" placeholder="Şifrə (min 8 simvol)" required minlength="8">
+                    <button type="submit">Qeydiyyatı Tamamla</button>
+                </form>
+                <p id="reg-msg" class="msg"></p>
+                <p class="toggle-text">Artıq hesabınız var? <span onclick="switchAuth('login')">Giriş edin</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SƏHİFƏ 2: MAĞAZA -->
+    <div id="store-page">
+        <header>
+            <h1>RETRO SOUNDS</h1>
+            <div>
+                <span id="welcome-user" style="margin-right: 20px; color: #aaa;"></span>
+                <button class="logout-btn" onclick="logout()">Çıxış Et</button>
+                <button class="cart-btn" id="cart-button" onclick="openCart()">Səbət (0)</button>
+            </div>
+        </header>
+        <div class="container">
+            <div id="products-container" class="products-grid"></div>
+        </div>
+    </div>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCart()">&times;</span>
+            <h2 style="color: var(--primary); margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px;">Sizin Səbətiniz</h2>
+            <div id="cart-items-list"></div>
+            <div class="cart-total" id="cart-total-price">Cəmi: 0.00 ₼</div>
+            <button class="checkout-btn" onclick="checkout()">Sifarişi Təsdiqlə (Ödəniş)</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
